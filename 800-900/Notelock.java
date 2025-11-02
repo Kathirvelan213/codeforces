@@ -2,11 +2,26 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
-
-    static int solve(int[] arr) {
-        // your solution logic here
-        return 0;
+public class Notelock {
+//turns out i understood the problem wrong at the first read, so my implementation is not good
+    static int solve(String s,int n,int k) throws  IOException {
+        int l=0;
+        int count=0, oneCount=0;
+        for (int r = 0; r < n; r++) {
+            if(s.charAt(r)=='1'){
+                if(oneCount==0){
+                    count++;
+                }
+                oneCount++;
+            }
+            if(r-l>=k-1){
+                if(s.charAt(l)=='1'){
+                    oneCount--;
+                }
+                l++;
+            }
+        }
+        return count;
     }
 
     public static void main(String[] args) throws IOException {
@@ -16,12 +31,11 @@ public class Main {
         int t = fr.nextInt(); // number of test cases
         while (t-- > 0) {
             int n = fr.nextInt();          
-            int[] arr = new int[n];        
-            for (int i = 0; i < n; i++) {
-                arr[i] = fr.nextInt();     
-            }
+            int k = fr.nextInt();  
+            String s=fr.next();        
+            
 
-            out.println(solve(arr));       
+            out.println(solve(s,n,k));       
         }
 
         out.close();
